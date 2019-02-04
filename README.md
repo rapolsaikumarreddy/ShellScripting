@@ -1,2 +1,2 @@
 # ShellScripting
-ShellScripting Practice
+Here you can find Shell SCriting Examples.

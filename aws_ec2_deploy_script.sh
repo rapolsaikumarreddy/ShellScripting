@@ -14,7 +14,7 @@ aws_security_groupId="sg-015c35f3195812390"
 
 
 echo -e "\e[33m ---- | Generating Keypair for ec2 instance | ----\033[0m"
-aws ec2 create-key-pair --key-name rapol_key --query 'KeyMaterial' output text 2>$1 | tee $ssh_key
+aws ec2 create-key-pair --key-name rapol_key --query 'KeyMaterial' --output text 2>&1 | tee $ssh_key
 
 #Setting permissions for pem file
 
@@ -23,7 +23,7 @@ chmod 400 $ssh_key
 
 echo "Creating ec2 instance in AWS"
 
-ec2_instanceId=$(aws ec2 run-instances --image-id $aws_image_id --count 1 --instance-type $aws_instance_type --key-name $aws_key_name --security-group-ids $aws_security_groupId --subnet-id $aws_subnetId --associate-public-ip-address --tag-specifications 'ResourceType=instance,Tags=[{Key=$aws_tag_key,Value=$aws_tag_value}]'| grep InstanceId | cut -d":" -f2 | cut -d'"' -f2)
+ec2_instanceId=$(aws ec2 run-instances --image-id $aws_image_id --count 1 --instance-type $aws_instance_type --key-name $aws_key_name --security-group-ids $aws_security_groupId --subnet-id $aws_subnetId  --tag-specifications 'ResourceType=instance,Tags=[{Key=$aws_tag_key,Value=$aws_tag_value}]'| grep InstanceId | cut -d":" -f2 | cut -d'"' -f2)
  
 #echo $ec2_instanceId
 echo "============================="

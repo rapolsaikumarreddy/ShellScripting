@@ -1,2 +1,1 @@
-# ShellScripting
-Here you can find Shell SCriting Examples.
+You can find examples of "AWS automation using ShellScripting" in this branch
